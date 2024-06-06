@@ -1,52 +1,46 @@
-import tkinter as tk 
-from tkinter import *
-from tkinter import ttk
-import playsound as p
+import tkinter as tk
+from tkinter import PhotoImage
+import playsound as playsound
 
 
-def playsound(event):
-    print(event)
-    p.playsound("Bear.mp3")
+def play_Bear_sound(event=None):
+    playsound("Bear.mp3", block=False)
 
-def playsound2(event2):
-    print(event2)
-    p.playsound("lion.mp3")
+def play_lion_sound(event=None):
+    playsound("lion.mp3", block=False)
 
-def playsound3(event3):
-    print(event3)
-    p.playsound("oink.mp3")
+def play_oink_sound(event=None):
+    playsound("oink", block=False)
 
-def playsound4(event4):
-    print(event4)
-    p.playsound("snake.mp3")
+def play_snake_sound(event=None):
+    playsound("snake.mp3", block=False)
 
-def playsound5(event5):
-    print(event5)
-    p.playsound("yipee.mp3")
+def play_yipee_sound(event=None):
+    playsound("yipee.mp3", block=False)
 
+# Initialize the main window
 win = tk.Tk()
-win.attributes('-topmost',True)
-l1 = tk.Label(win,text="This button has an event bound by a command")
-l2 = tk.Label(win,text="This button has an event bound by a bind")
+win.title("Animal Soundboard")
+win.attributes('-topmost', True)
 
-# buttons b1 and b2 do the same
-# note that the callback for b1 is included in its definition
-# but the callback for b2 is in a separate command
-Lion =  tk.Button(win,text="Click to play",command="playsound2") 
-snake =  tk.Button(win,text="Click to play",command="playsound4")
-Pig =  tk.Button(win,text="Click to play",command="playsound3")
-Bear =  tk.Button(win,text="Click to play",command="playsound")
-Yipee=  tk.Button(win,text="Click to play",command="playsound5")
+# Create labels and buttons for each sound
+labels = ["Dog", "Cat", "Cow"]
+callbacks = [play_dog_sound, play_cat_sound, play_cow_sound]
+buttons = []
 
-playsound
-Lion.bind("<Button>")
+# Load images
+dog_img = PhotoImage(file="dog.png")
+cat_img = PhotoImage(file="cat.png")
+cow_img = PhotoImage(file="cow.png")
+images = [dog_img, cat_img, cow_img]
 
+for i, label in enumerate(labels):
+    l = tk.Label(win, text=f"Click to play {label} sound")
+    l.pack()
+    b = tk.Button(win, text=f"Play {label} Sound", image=images[i], compound="left")
+    b.bind("<Button>", callbacks[i])
+    b.pack()
+    buttons.append(b)
 
-
-
-Lion.grid(row = 5, column = 5)
-snake.grid()
-
-
-
+# Run the Tkinter main loop
 win.mainloop()
