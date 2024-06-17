@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import PhotoImage
-from playsound import playsound
+import playsound as p
 
 def play_bear_sound(event=None):
     playsound("Bear.mp3", block=False)
